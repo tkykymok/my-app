@@ -1,12 +1,18 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { ScrollView } from "react-native";
+import useSWR from "swr";
+import { getTodos, Item } from "./tab1";
 
-const Tab1 = () => {
+const Tab2 = () => {
+  const { data } = useSWR("todos", getTodos);
+
   return (
-    <View>
-      <Text>Tab 2</Text>
-    </View>
+    <ScrollView>
+      {data.map((item: any) => (
+        <Item title={item.title} completed={item.completed} />
+      ))}
+    </ScrollView>
   );
 };
 
-export default Tab1;
+export default Tab2;
