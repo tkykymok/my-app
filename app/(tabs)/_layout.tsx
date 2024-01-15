@@ -1,55 +1,36 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, useColorScheme } from 'react-native';
+import React from "react";
+import { Tabs } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
 
-import Colors from '../../constants/Colors';
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const _Layout = () => {
   return (
     <Tabs
+      initialRouteName={"tab1"}
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-      }}>
+        headerShown: false,
+        tabBarActiveTintColor: "orange",
+        tabBarIconStyle: {
+          marginBottom: -3,
+        },
+      }}
+    >
       <Tabs.Screen
-        name="index"
+        name="tab1"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Link href="/modal" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="info-circle"
-                    size={25}
-                    color={Colors[colorScheme ?? 'light'].text}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
+          tabBarLabel: "Tab 1",
+          title: "Tab 1",
+          tabBarIcon: () => <FontAwesome name="home" size={24} />,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="tab2"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarLabel: "Tab 2",
+          tabBarIcon: () => <FontAwesome name="home" />,
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default _Layout;
